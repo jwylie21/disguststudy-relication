@@ -2,17 +2,17 @@
 <html>
     <head>  
         <title>Visual Acuity Experiment</title> 
-        <script src = "jsPsych/jspsych.js"></script>
-        <script src = "jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
-        <script src = "jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
-        <script src = "jsPsych/plugins/jspsych-video-keyboard-response.js"></script>
-        <script src = "jsPsych/plugins/jspsych-instructions.js"></script>
-        <script src = "jsPsych/plugins/jspsych-survey-html-form.js"></script>
-        <script src = "jsPsych/plugins/jspsych-fullscreen.js"></script>
-        <script src = "jsPsych/plugins/jspsych-survey-multi-choice.js"></script>
-        <script src = "jsPsych/plugins/jspsych-resize.js"></script>
-        <script src = "jsPsych/plugins/jspsych-survey-text.js"></script>
-        <link href = "jsPsych/css/jspsych.css" rel = "stylesheet">
+        <script src = "jspsych.js"></script>
+        <script src = "Plugins/jspsych-html-keyboard-response.js"></script>
+        <script src = "Plugins/jspsych-image-keyboard-response.js"></script>
+        <script src = "Plugins/jspsych-video-keyboard-response.js"></script>
+        <script src = "Plugins/jspsych-instructions.js"></script>
+        <script src = "Plugins/jspsych-survey-html-form.js"></script>
+        <script src = "Plugins/jspsych-fullscreen.js"></script>
+        <script src = "Plugins/jspsych-survey-multi-choice.js"></script>
+        <script src = "Plugins/jspsych-resize.js"></script>
+        <script src = "Plugins/jspsych-survey-text.js"></script>
+        <link href = "jspsych.css" rel = "stylesheet">
     </head>
     <body></body>
     <script>
@@ -139,39 +139,39 @@ timeline.push(compSize);
 
     /* Pracitce Trials - stim */
   var pracStim = [
-      { stimulus: "2TrialD.bmp", data: { test_part: 'practice', correct_response: '2' } },
-      { stimulus: "3TrailL.bmp", data: { test_part: 'practice', correct_response: '3' } },
-      { stimulus: "1TrialD.bmp", data: { test_part: 'practice', correct_response: '1' } },
-      { stimulus: "5TrialL.bmp", data: { test_part: 'practice', correct_response: '5' } }
+      { stimulus: "img/2TrialD.bmp", data: { test_part: 'practice', correct_response: '2' } },
+      { stimulus: "img/3TrailL.bmp", data: { test_part: 'practice', correct_response: '3' } },
+      { stimulus: "img/1TrialD.bmp", data: { test_part: 'practice', correct_response: '1' } },
+      { stimulus: "img/5TrialL.bmp", data: { test_part: 'practice', correct_response: '5' } }
     ]
     /* dark trials - first one is hard and second one is easy */
 
     var stimuli1 = [
-      { stimulus: "1DE1.bmp", data: { test_part: 'test', correct_response: '1' } },
-      { stimulus: "1DE2.bmp", data: { test_part: 'test', correct_response: '1' } },
-      { stimulus: "2DE1.bmp", data: { test_part: 'test', correct_response: '2' } },
-      { stimulus: "2DE2.bmp", data: { test_part: 'test', correct_response: '2' } },
-      { stimulus: "3DE1.bmp", data: { test_part: 'test', correct_response: '3' } },
-      { stimulus: "3DE2.bmp", data: { test_part: 'test', correct_response: '3' } },
-      { stimulus: "4DE1.bmp", data: { test_part: 'test', correct_response: '4' } },
-      { stimulus: "4DE2.bmp", data: { test_part: 'test', correct_response: '4' } },
-      { stimulus: "5DE1.bmp", data: { test_part: 'test', correct_response: '5' } },
-      { stimulus: "5DE2.bmp", data: { test_part: 'test', correct_response: '5' } }
+      { stimulus: "img/1DE1.bmp", data: { test_part: 'test', correct_response: '1' } },
+      { stimulus: "img/1DE2.bmp", data: { test_part: 'test', correct_response: '1' } },
+      { stimulus: "img/2DE1.bmp", data: { test_part: 'test', correct_response: '2' } },
+      { stimulus: "img/2DE2.bmp", data: { test_part: 'test', correct_response: '2' } },
+      { stimulus: "img/3DE1.bmp", data: { test_part: 'test', correct_response: '3' } },
+      { stimulus: "img/3DE2.bmp", data: { test_part: 'test', correct_response: '3' } },
+      { stimulus: "img/4DE1.bmp", data: { test_part: 'test', correct_response: '4' } },
+      { stimulus: "img/4DE2.bmp", data: { test_part: 'test', correct_response: '4' } },
+      { stimulus: "img/5DE1.bmp", data: { test_part: 'test', correct_response: '5' } },
+      { stimulus: "img/5DE2.bmp", data: { test_part: 'test', correct_response: '5' } }
     ]
 
     /* light trials - first one is hard and second one is easy */
 
     var stimuli2 = [
-      { stimulus: "1LE1.bmp", data: { test_part: 'test', correct_response: '1' } },
-      { stimulus: "1LE2.bmp", data: { test_part: 'test', correct_response: '1' } },
-      { stimulus: "2LE1.bmp", data: { test_part: 'test', correct_response: '2' } },
-      { stimulus: "2LE2.bmp", data: { test_part: 'test', correct_response: '2' } },
-      { stimulus: "3LE1.bmp", data: { test_part: 'test', correct_response: '3' } },
-      { stimulus: "3LE2.bmp", data: { test_part: 'test', correct_response: '3' } },
-      { stimulus: "4LE1.bmp", data: { test_part: 'test', correct_response: '4' } },
-      { stimulus: "4LE2.bmp", data: { test_part: 'test', correct_response: '4' } },
-      { stimulus: "5LE1.bmp", data: { test_part: 'test', correct_response: '5' } },
-      { stimulus: "5LE2.bmp", data: { test_part: 'test', correct_response: '5' } }
+      { stimulus: "img/1LE1.bmp", data: { test_part: 'test', correct_response: '1' } },
+      { stimulus: "img/1LE2.bmp", data: { test_part: 'test', correct_response: '1' } },
+      { stimulus: "img/2LE1.bmp", data: { test_part: 'test', correct_response: '2' } },
+      { stimulus: "img/2LE2.bmp", data: { test_part: 'test', correct_response: '2' } },
+      { stimulus: "img/3LE1.bmp", data: { test_part: 'test', correct_response: '3' } },
+      { stimulus: "img/3LE2.bmp", data: { test_part: 'test', correct_response: '3' } },
+      { stimulus: "img/4LE1.bmp", data: { test_part: 'test', correct_response: '4' } },
+      { stimulus: "img/4LE2.bmp", data: { test_part: 'test', correct_response: '4' } },
+      { stimulus: "img/5LE1.bmp", data: { test_part: 'test', correct_response: '5' } },
+      { stimulus: "img/5LE2.bmp", data: { test_part: 'test', correct_response: '5' } }
     ]
 
     test_stimuli1 = jsPsych.randomization.sampleWithReplacement(stimuli1, 10)
