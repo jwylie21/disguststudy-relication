@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+    <head>  
+        <title>Visual Acuity Experiment</title> 
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <!-- Load the jspsych library and plugins -->
+        
+        <script src = "jspsych.js"></script>
+        <script src = "Plugins/jspsych-html-keyboard-response.js"></script>
+        <script src = "Plugins/jspsych-image-keyboard-response.js"></script>
+        <script src = "Plugins/jspsych-video-keyboard-response.js"></script>
+        <script src = "Plugins/jspsych-instructions.js"></script>
+        <script src = "Plugins/jspsych-survey-html-form.js"></script>
+        <script src = "Plugins/jspsych-fullscreen.js"></script>
+        <script src = "Plugins/jspsych-survey-multi-choice.js"></script>
+        <script src = "Plugins/jspsych-resize.js"></script>
+        <script src = "Plugins/jspsych-survey-text.js"></script>
+        
+        <link href = "jspsych.css" rel = "stylesheet">
+    </head>
+    <body></body>
+    <script>
+
+/* create timeline */
+var timeline = [];
+
+function set_html_style_1() {
+    document.body.style.backgroundColor = 'white' // background color
+    document.body.style.color = 'black' // font color
+}
+
+function set_html_style_2() {
+    document.body.style.backgroundColor = 'black'
+    document.body.style.color = 'white'
+}
+
+/* define welcome message trial */
+    var welcome = {
+      type: "html-keyboard-response",
+      stimulus: '<div style="color:black;font-size:40px;line-height:1.5">Welcome to our experiment! We will first switch your computer to full screen (please leave it in full screen for the remainder of the experiment), and then have you complete a sizing task to get an estimate of your computers pixels. <p><b>Press any key to begin.</b></p></div>',
+    };
+    timeline.push(welcome);
+
+/* Computer things */
+
+timeline.push({
+  type: 'fullscreen',
+  fullscreen_mode: true
+});
+
+var compSize = {
+  type: 'resize',
+  item_width: 3 + 3/8,
+  item_height: 2 + 1/8,
+  prompt: "<p>First, we will calibrate your screen. Please take a moment to get a credit card and hold it up to the screen. Drag the box until it is the same size as the credit card when you hold it against your screen</p>",
+  pixels_per_unit: 150
+};
+timeline.push(compSize);
+
+/* define instructions trial */
+  var instructions = {
+      type: "instructions",
+      pages: ['<div style="color:black;font-size:30px;line-height:1.5"><p>In this experiment, we are interested in exploring how the eye works, ' +
+          "and how certain visual inputs are easier or harder to see.</p><p>" +
+          "<p>It is <b>very important</b> that you do <b>not</b> exit full screen mode or move you screen to try to see the images." + 
+          " Because the task is hard, it will be tempting to adjust things. But please try to resist adjusting your computer. </p>" +
+          " We also recommend that you complete this study <b>indoors</b> and in a dimly lit room with the brightness all the way up on the computer. This will make it easier for you to see when the main task begins. " +
+          "Before we get started, we will walk you through the steps of how the task looks to make sure you are ready and understand the instructions.</p> " + 
+          "<p><b>Press the right arrow key to continue.</b></p>",
+ 
+          '<div style="color:black;font-size:30px;line-height:1.5"> For the main task, you will first see a <b>+</b> in the middle of a blank screen. This is to let you know that main task is about to pop up. This will only be there for a short amount of time.'+
+          " After the <b>+</b>, you will see a screen that is either black or white with a number 1-5 listed on the screen. This number will be <strong>VERY</strong> hard to see." + 
+          " </p> Your task is to choose the correct number that is presented on the screen using the numbers on your computer that correspond. If you cannot see the number, try your best to guess what it might be. The trial will not move forward until you make a response. " + 
+          ' <p> Here is an example of what you will see:</p> <p><img src="Example1_DR.png"></img></p>' + 
+          ' <p><b>Press the right arrow key to continue.</b></p></div>', 
+          ' <div style="color:black;font-size:30px;line-height:1.5"><p>There are a total of 4 blocks. Some trials will be light gray on a white background and some will be dark gray on a black background. </p>' +
+          '<p><b>Press the right arrow key to continue.</b></p></div>'],
+        key_forward: 'rightarrow',
+      post_trial_gap: 2000
+    };
+    timeline.push(instructions);
+    
+        /* define Trial blocks message */
+    var practiceTrials = {
+      type: "html-keyboard-response",
+      stimulus: '<div style="color:black;font-size:30px;line-height:1.5"><b>Please press the right arrow key to begin the practice trials. Make sure your brightness is set all the way up on your computer.</b></div>',
+      key_forward: 'rightarrow',
+      post_trial_gap: 2000
+    };
+    timeline.push(practiceTrials);
+    
+    /* define End of trial block message */
+    var practiceEnd = {
+      type: "html-keyboard-response",
+      stimulus: '<div style="color:blue;font-size:40px;line-height:1.5">Great! Now it is time for the main experiment. Good luck! Press the right arrow key to move forward with the experiment!</div>',
+      key_forward: 'rightarrow',
+      post_trial_gap: 3000
+    };
+
+    /* define between blocks message */
+    var betweenTrials = {
+      type: "html-keyboard-response",
+      on_start: set_html_style_1,
+      stimulus: '<div style="color:blue;font-size:40px;line-height:1.5">You have just completed a full block of the task! When you select the <b>right arrow key</b>, the experiment will continue with images and then another block of the task. Press the right arrow key to move forward with the experiment!</div>',
+      key_forward: 'rightarrow',
+      on_finish: set_html_style_1,
+      post_trial_gap: 3000
+    };
+
+    var finalTrials = {
+      type: "html-keyboard-response",
+      on_start: set_html_style_1,
+      stimulus: '<div style="color:black;font-size:40px;line-height:1.5">You have just completed the main experimental task! We will conclude with some questions about you as an individual. Please try to answer as honestly as possible. Please press the <b>right arrow key</b> to move to the final portion of the experiment</div>',
+      key_forward: 'rightarrow',
+      on_finish: set_html_style_1,
+      post_trial_gap: 2000
+    };
+
+/* define stimuli */
+    var fixationW = {
+      type: 'html-keyboard-response',
+      on_start: set_html_style_1,
+      stimulus: '<div style="font-size:60px;">+</div>',
+      choices: jsPsych.NO_KEYS,
+      on_finish: set_html_style_1,
+      trial_duration: function(){
+        return jsPsych.randomization.sampleWithReplacement([250, 500, 750, 1000, 1250, 1500], 1)[0];
+      },
+      data: {test_part: 'fixation'}
+    }
+    
+    var fixationB = {
+      type: 'html-keyboard-response',
+      on_start: set_html_style_2,
+      stimulus: '<div style="font-size:60px;">+</div>',
+      choices: jsPsych.NO_KEYS,
+      on_finish: set_html_style_2,
+      trial_duration: function(){
+        return jsPsych.randomization.sampleWithReplacement([250, 500, 750, 1000, 1250, 1500], 1)[0];
+      },
+      data: {test_part: 'fixation'}
+    }
+
+    /* Pracitce Trials - stim */
+  var pracStim = [
+      { stimulus: "img/2TrialD.bmp", data: { test_part: 'practice', correct_response: '2' } },
+      { stimulus: "img/3TrailL.bmp", data: { test_part: 'practice', correct_response: '3' } },
+      { stimulus: "img/1TrialD.bmp", data: { test_part: 'practice', correct_response: '1' } },
+      { stimulus: "img/5TrialL.bmp", data: { test_part: 'practice', correct_response: '5' } }
+    ]
+    /* dark trials - first one is hard and second one is easy */
+
+    var stimuli1 = [
+      { stimulus: "img/1DE1.bmp", data: { test_part: 'test', correct_response: '1' } },
+      { stimulus: "img/1DE2.bmp", data: { test_part: 'test', correct_response: '1' } },
+      { stimulus: "img/2DE1.bmp", data: { test_part: 'test', correct_response: '2' } },
+      { stimulus: "img/2DE2.bmp", data: { test_part: 'test', correct_response: '2' } },
+      { stimulus: "img/3DE1.bmp", data: { test_part: 'test', correct_response: '3' } },
+      { stimulus: "img/3DE2.bmp", data: { test_part: 'test', correct_response: '3' } },
+      { stimulus: "img/4DE1.bmp", data: { test_part: 'test', correct_response: '4' } },
+      { stimulus: "img/4DE2.bmp", data: { test_part: 'test', correct_response: '4' } },
+      { stimulus: "img/5DE1.bmp", data: { test_part: 'test', correct_response: '5' } },
+      { stimulus: "img/5DE2.bmp", data: { test_part: 'test', correct_response: '5' } }
+    ]
+
+    /* light trials - first one is hard and second one is easy */
+
+    var stimuli2 = [
+      { stimulus: "img/1LE1.bmp", data: { test_part: 'test', correct_response: '1' } },
+      { stimulus: "img/1LE2.bmp", data: { test_part: 'test', correct_response: '1' } },
+      { stimulus: "img/2LE1.bmp", data: { test_part: 'test', correct_response: '2' } },
+      { stimulus: "img/2LE2.bmp", data: { test_part: 'test', correct_response: '2' } },
+      { stimulus: "img/3LE1.bmp", data: { test_part: 'test', correct_response: '3' } },
+      { stimulus: "img/3LE2.bmp", data: { test_part: 'test', correct_response: '3' } },
+      { stimulus: "img/4LE1.bmp", data: { test_part: 'test', correct_response: '4' } },
+      { stimulus: "img/4LE2.bmp", data: { test_part: 'test', correct_response: '4' } },
+      { stimulus: "img/5LE1.bmp", data: { test_part: 'test', correct_response: '5' } },
+      { stimulus: "img/5LE2.bmp", data: { test_part: 'test', correct_response: '5' } }
+    ]
+
+    test_stimuli1 = jsPsych.randomization.sampleWithReplacement(stimuli1, 10)
+    test_stimuli2 = jsPsych.randomization.sampleWithReplacement(stimuli2, 10)
+
+/* define detection responses and accuracy codes  */ 
+
+    var prac = {
+      type: "image-keyboard-response",
+      stimulus: jsPsych.timelineVariable('stimulus'),
+      choices: ['1', '2', '3', '4', '5'],
+      stimulus_height: 900,
+      stimulus_width: 1440,
+      data: jsPsych.timelineVariable('data'),
+      on_finish: function(data){
+        data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
+      }
+    };
+    
+    var test = {
+      type: "image-keyboard-response",
+      stimulus: jsPsych.timelineVariable('stimulus'),
+      choices: ['1', '2', '3', '4', '5'],
+      stimulus_height: 900,
+      stimulus_width: 1440,
+      data: jsPsych.timelineVariable('data'),
+      on_finish: function(data){
+        data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
+      }
+    };
+
+/* define procedures */  
+
+var prac_procedure = {
+      timeline: [fixationW, prac],
+      timeline_variables: pracStim,
+      randomize_order: true
+    }
+
+
+var test_procedure1 = {
+      timeline: [fixationB, test],
+      on_start: set_html_style_2,
+      timeline_variables: test_stimuli1,
+      on_finish: set_html_style_2,
+      randomize_order: true
+    }
+
+var test_procedure2 = {
+      timeline: [fixationB, test],
+      on_start: set_html_style_2,
+      timeline_variables: test_stimuli1,
+      on_finish: set_html_style_2,
+      randomize_order: true
+    }
+
+var test_procedure3 = {
+      timeline: [fixationB, test],
+      on_start: set_html_style_2,
+      timeline_variables: test_stimuli1,
+      on_finish: set_html_style_2,
+      randomize_order: true
+    }
+
+var test_procedure4 = {
+      timeline: [fixationB, test],
+      on_start: set_html_style_2,
+      timeline_variables: test_stimuli1,
+      on_finish: set_html_style_2,
+      randomize_order: true
+    }
+
+var test_procedure5 = {
+      timeline: [fixationW, test],
+      on_start: set_html_style_1,
+      timeline_variables: test_stimuli2,
+      on_finish: set_html_style_1,
+      randomize_order: true
+    }
+
+var test_procedure6 = {
+      timeline: [fixationW, test],
+      on_start: set_html_style_1,
+      timeline_variables: test_stimuli2,
+      on_finish: set_html_style_1,
+      randomize_order: true
+    }
+
+var test_procedure7 = {
+      timeline: [fixationW, test],
+      on_start: set_html_style_1,
+      timeline_variables: test_stimuli2,
+      on_finish: set_html_style_1,
+      randomize_order: true
+    }
+
+var test_procedure8 = {
+      timeline: [fixationW, test],
+      on_start: set_html_style_1,
+      timeline_variables: test_stimuli2,
+      on_finish: set_html_style_1,
+      randomize_order: true
+    }
+
+/* Define blocks */
+
+    let blk1 = {
+        timeline: jsPsych.randomization.shuffle([test_procedure1, test_procedure5]),
+        repetitions: 1
+        };
+
+    let blk2 = {
+        timeline: jsPsych.randomization.shuffle([test_procedure2, test_procedure6]),
+        repetitions: 1
+        };
+
+    let blk3 = {
+        timeline: jsPsych.randomization.shuffle([test_procedure3, test_procedure7]),
+        repetitions: 1
+        };
+
+    let blk4 = {
+        timeline: jsPsych.randomization.shuffle([test_procedure4, test_procedure8]),
+        repetitions: 1
+        };
+        
+/* define Questionnaires */  
+    var DSR1q = ["Strongly disagree", "Mildly disagree", "Neither agree nor disagree", "Mildly agree", "Strongly agree"];
+    var DSR2q = ["Strongly disagree", "Mildly disagree", "Neither agree nor disagree", "Mildly agree", "Strongly agree"];
+    var Genderq = ["Male", "Female", "Non-binary", "Other"];
+    var Visionq = ["Normal Vision", "Corrected to normal", "Neither (not normal vision, forgot glass, etc)"];
+    var PolIDq = ["Extremely Liberal", " ", " ", " Neither", " ", " ", "Extremely Conservative"];
+    var Demand1q = ["Not at all", "A little bit", "Somewhat", "Quite a bit", "Very much so"];
+    var compChangeq = ["I did not adjust my computer", "I adjusted my computer's brightness", "I adjusted the angle of my monitor/screen", "I adjusted both"];
+    var compTypeq = ["Laptop/Desktop", "Ipad/Tablet", "Other"];
+    var browserTypeq = ["Chrome", "Firefox", "Other"];
+
+
+        var DSR_b1 = {
+        type: 'survey-multi-choice',
+        questions: [
+            {prompt: '<p style="text-align: left;font-size:20px;">A persons family is the most important thing in life.</p>', options: DSR1q, required: true, horizontal: true,}, 
+            {prompt: '<p style="text-align: left;font-size:20px;">It would bother me to be in a science class, and to see a human hand preserved in a jar.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">It bothers me to hear someone clear a throat full of mucous.</p>', options: DSR1q, required: true, horizontal: true,}, 
+            {prompt: '<p style="text-align: left;font-size:20px;">I never let any part of my body touch the toilet seat in public restrooms.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">I would go out of my way to avoid walking through a graveyard.</p>', options: DSR1q, required: true, horizontal: true,}, 
+            {prompt: '<p style="text-align: left;font-size:20px;">Seeing a cockroach in someone elses house doesnt bother me.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">It would bother me tremendously to touch a dead body.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">If I see someone vomit, it makes me sick to my stomach.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">I probably would not go to my favorite restaurant if I found out that the cook had a cold.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">It would not upset me at all to watch a person with a glass eye take the eye out of the socket.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">It would bother me to see a rat run across my path in a park.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">I would rather eat a piece of fruit than a piece of paper.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">Even if I was hungry, I would not drink a bowl of my favorite soup if it had been stirred by a used but thoroughly washed flyswatter.</p>', options: DSR1q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">It would bother me to sleep in a nice hotel room if I knew that a man had died of a heart attack in that room the night before.</p>', options: DSR1q, required: true, horizontal: true}
+        ],
+        randomize_question_order: true,
+        preamble: 'Please indicate how much you agree with each of the following statements, or how true it is about you. Please write a number (0-4) to indicate your answer:'
+        };
+
+        var DSR_b2 = {
+        type: 'survey-multi-choice',
+        questions: [
+            {prompt: '<p style="text-align: left;font-size:20px;">You see maggots on a piece of meat in an outdoor garbage pail.</p>', options: DSR2q, required: true, horizontal: true,}, 
+            {prompt: '<p style="text-align: left;font-size:20px;">You see a person eating an apple with a knife and fork.</p>', options: DSR2q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">While you are walking through a tunnel under a railroad track, you smell urine.</p>', options: DSR2q, required: true, horizontal: true,}, 
+            {prompt: '<p style="text-align: left;font-size:20px;">You take a sip of soda, and then realize that you drank from the glass that an acquaintance of yours had been drinking from.</p>', options: DSR2q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">Your friends pet cat dies, and you have to pick up the dead body with your bare hands.</p>', options: DSR2q, required: true, horizontal: true,}, 
+            {prompt: '<p style="text-align: left;font-size:20px;">You see someone put ketchup on vanilla ice cream, and eat it.</p>', options: DSR2q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">You see a man with his intestines exposed after an accident.</p>', options: DSR2q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">You discover that a friend of yours changes underwear only once a week.</p>', options: DSR2q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">A friend offers you a piece of chocolate shaped like dog doo.</p>', options: DSR2q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">You accidentally touch the ashes of a person who has been cremated.</p>', options: DSR2q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">You are about to drink a glass of milk when you smell that it is spoiled.</p>', options: DSR2q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">As part of a sex education class, you are required to inflate a new unlubricated condom, using your mouth.</p>', options: DSR2q, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">You are walking barefoot on concrete, and you step on an earthworm.</p>', options: DSR2q, required: true, horizontal: true}        ],
+        randomize_question_order: true,
+        preamble: 'For the next series of statements, please indicate how disgusting would you find each of the following experiences:'
+        };
+        
+        var demo_Age = {
+        type: 'survey-text',
+        on_start: set_html_style_1,
+        questions: [
+        {prompt: 'How old are you?', columns: 3, required: true, name: 'Age'},
+        {prompt: 'What is your religious affiliation?', columns: 50, name: 'Religious Affiliation'}
+        ],
+        on_finish: set_html_style_1,
+        randomize_question_order: true
+        };
+        
+        var Demographics = {
+        type: 'survey-multi-choice',
+        on_start: set_html_style_1,
+        questions: [
+            {prompt: '<p style="text-align: left;font-size:20px;">What is your Gender?</p>', options: Genderq, required: true, horizontal: true,}, 
+            {prompt: '<p style="text-align: left;font-size:20px;">Which of the following best describes your vision?</p>', options: Visionq, required: true, horizontal: true}        
+            ],
+        on_finish: set_html_style_1,
+        randomize_question_order: true,
+        preamble: 'Using the scales provided, please respond to each question about you as an individual.'
+        };
+
+        var demo_PolIQ = {
+        type: 'survey-multi-choice',
+        on_start: set_html_style_1,
+        questions: [
+            {prompt: '<p style="text-align: left;font-size:20px;">Which response best captures your political beliefs surrounding economic issues?</p>', options: PolIDq, required: true, horizontal: true,}, 
+            {prompt: '<p style="text-align: left;font-size:20px;">Which response best captures your political beliefs surrounding social issues?</p>', options: PolIDq, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">When it comes to overall political issues, you consider yourself to be a:</p>', options: PolIDq, required: true, horizontal: true,}
+          ],
+        on_finish: set_html_style_1,
+        randomize_question_order: true,
+        preamble: 'Please answer the following questions about your political ideology.'
+        };
+
+        var demo_FinalQs = {
+        type: 'survey-multi-choice',
+        on_start: set_html_style_1,
+        questions: [
+            {prompt: '<p style="text-align: left;font-size:20px;">What kind of device did you use to complete this study?</p>', options: compTypeq, required: true, horizontal: true,}, 
+            {prompt: '<p style="text-align: left;font-size:20px;">Did you adjust your computer in any way (its okay if you did! we just need to be able to account for it!)?</p>', options: compChangeq, required: true, horizontal: true},
+            {prompt: '<p style="text-align: left;font-size:20px;">Did you feel pressure to respond in a particular way to any of the questions in order to appear a certain way?</p>', options: Demand1q, required: true, horizontal: true,},
+            {prompt: '<p style="text-align: left;font-size:20px;">What internet/web browser did you use to complete this study?</p>', options: browserTypeq, required: true, horizontal: true,}
+            ],
+        on_finish: set_html_style_1,
+        preamble: 'For these final questions, please answer as honestly as you can! These will help us understand your results and will bare no influence on you!'
+        };
+
+/* define Timeline // Experiment Flow */  
+  timeline.push(prac_procedure);
+  timeline.push(practiceEnd);
+
+    timeline.push(blk1);
+    timeline.push(betweenTrials); 
+
+    timeline.push(blk2);
+    timeline.push(betweenTrials); 
+  
+    timeline.push(blk3);
+    timeline.push(betweenTrials); 
+  
+    timeline.push(blk4);
+    timeline.push(finalTrials);
+
+    timeline.push(DSR_b1);
+    timeline.push(DSR_b2);
+    timeline.push(Demographics);
+    timeline.push(demo_Age);
+    timeline.push(demo_PolIQ);
+    timeline.push(demo_FinalQs);
+    
+  // exit fullscreen mode
+timeline.push({
+  type: 'fullscreen',
+  fullscreen_mode: false
+});
+    
+// /* define debrief */
+
+    var debrief = {
+      type: "html-keyboard-response",
+      on_start: set_html_style_1,
+      stimulus: "<p>Thank you for your participation!</p>" + 
+      '<div align="left"><p>Let me tell you a little about what we did today. In this lab we are interested in how our motivations influence behavior and mental effort, particularly those related to our emotions or our values.<p>' + 
+      "Previous research has shown morals influence a number of behavioral tasks. For example, research has shown that moral concerns can influence awareness of ambiguously presented stimuli and that moral words 'pop-out' in quick naming tasks compared to non-moral words (Gantman & Van Bavel, 2013). " + 
+      " Other work has shown that moral values influence how polarizing an individual finds a specific issue (Garrett & Bankert, 2018). We believe that the ways that issues become moral issues is an important step to understanding how and why they influence the brain and behavior. Specifically, we believe that issue group affiliation and issue consensus are two ways that moralized issues may impact behavior. " + 
+      " If an issue is seen to be highly moralized, nuanced opinions or strategies that allow for any of the action are not upheld by opposers (Wolsko, Ariceaga, & Seiden, 2016)." + 
+      " Another important part of this research looks at how moral ideas, like the traditional American values of Protestantism and Puritanism still play a big role in how people decide between different consumer products, and judge others. America was founded by Puritan Protestants, who intended to create an inherently spiritual nation, envisioning it as a land of purity and spiritually righteous people. " + 
+      " In fact, from the time of the first New England colonies, the ideologies of both the Protestant Work Ethic (views on work and salvation articulated by John Calvin) and Puritanism (the pursuit of piety through sexual and mental purity) have been forefront in the minds of Americans. While not everyone consciously endorses these beliefs today, we believe that Protestantism and Puritanism still play a big role in people’s intuitive judgments. " + 
+      " In the studies we are now carrying out, we subtly prime Protestant or Puritan ideas and show that these subtly influence people. As part of the present study, you completed a sentence unscrambling task in which you were primed with either words related to salvation (divine, heaven) or neutral control words. We are hypothesizing that American students primed with salvation will work harder on the anagram task that comes right afterward (in comparison to people in the neutral-words control condition). " + 
+      " This would be another manifestation of implicit Protestantism and Puritanism-- an unconscious link between hard work and divine salvation. " + 
+      " During the course of the task, we tried to make sure you weren’t thinking about morals specifically. Instead, we framed the tasks in relation to general social issues. If you were told to to explicitly use your own values and morals to complete the task, you might have completed the task differently than you would normally. This is the reason we don’t explicitly tell you beforehand. Your performance on the tasks in no way is related to your character. " + 
+      " Instead, these tasks are designed to test the hypothesis that specific characteristics of morals drive different intuitions about what is right and wrong to do in response. This means that even when you aren’t specifically trying to think about morally-related things, they jump out to you and grab your attention, and they drive how you decide to judge an instance or to act. The goal of the current study was to examine whether understanding what makes a moral “moralized” can help us define some of the conflict between differing opinions. " + 
+      " Moreover do interactions between morals and cognition depend on individual differences or on something more human evolution-related, like brain lateralities? For instance, research has shown that cognitive control is influenced selectively by approach-withdrawal states based on hemispheric congruence (or incongruence) with both being enhanced by brain activity in the left prefrontal cortex (Gray 2001; Gray & Baver 2002). Does this map onto morals in a similar way? Moreover, do morals have adaptive functions that promote specific cognitive processes, while inhibiting other processes. This would suggest that our morals bias processing of incoming information." + 
+      " Other parts of the experiment consisted of you filling out questionnaires.  These questionnaires provide us with information concerning your ideological background, mood state, political affiliation, individual values and your personality type.  These data will be used to see if any of these individual difference factors may be more or less likely to influence the tasks." + 
+      "<p> All of your responses in this experiment are completely anonymous— it is impossible to link your name to your questionnaire responses.</p>" + 
+      "In conclusion, your participation will help us understand processes involved in the use of mental resources when people are engaged in reasoning surrounding moral issues. Thanks again for your participation.  If you have further questions or concerns regarding this experiment, please contact Jordan Wylie; jwylie@gradcenter.cuny.edu </div>",
+      on_finish: set_html_style_1,
+      post_trial_gap: 500
+    };
+    timeline.push(debrief);
+    
+  var conclusion = {
+    type: 'html-keyboard-response',
+    stimulus: '<div style="font-size:20px;">This task is now over. Thank you for your participation! </div>',
+    choices: jsPsych.NO_KEYS
+    };
+    
+    timeline.push(conclusion)
+
+/* start the experiment */
+    jsPsych.init({
+      timeline: timeline,
+      on_finish: function() {
+        jsPsych.data.displayData();
+      }
+    });
+    
+    </script>
+</html>
