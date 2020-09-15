@@ -460,7 +460,8 @@
           " Moreover do interactions between morals and cognition depend on individual differences or on something more human evolution-related, like brain lateralities? For instance, research has shown that cognitive control is influenced selectively by approach-withdrawal states based on hemispheric congruence (or incongruence) with both being enhanced by brain activity in the left prefrontal cortex (Gray 2001; Gray & Baver 2002). Does this map onto morals in a similar way? Moreover, do morals have adaptive functions that promote specific cognitive processes, while inhibiting other processes. This would suggest that our morals bias processing of incoming information." + 
           " Other parts of the experiment consisted of you filling out questionnaires.  These questionnaires provide us with information concerning your ideological background, mood state, political affiliation, individual values and your personality type.  These data will be used to see if any of these individual difference factors may be more or less likely to influence the tasks." + 
           "<p> All of your responses in this experiment are completely anonymous— it is impossible to link your name to your questionnaire responses.</p>" + 
-          "In conclusion, your participation will help us understand processes involved in the use of mental resources when people are engaged in reasoning surrounding moral issues. Thanks again for your participation.  If you have further questions or concerns regarding this experiment, please contact Jordan Wylie; jwylie@gradcenter.cuny.edu </div>",
+          "In conclusion, your participation will help us understand processes involved in the use of mental resources when people are engaged in reasoning surrounding moral issues. Thanks again for your participation.  If you have further questions or concerns regarding this experiment, please contact Jordan Wylie; jwylie@gradcenter.cuny.edu (you may print this screen if you'd like) </div>" + 
+          "<p> Please click any key to continue </p>",
           on_finish: set_html_style_1,
           post_trial_gap: 500
         };
@@ -477,9 +478,25 @@
     /* start the experiment */
         jsPsych.init({
           timeline: timeline,
-          on_finish: function() {
-            jsPsych.data.displayData();
-          }
+          on_finish: function (data) {
+                /* Change 5: Summarizing and save the results to Qualtrics */
+                // summarize the results
+                var trials = jsPsych.data.get().filter({
+                    test_part: 'test'
+                });
+                var correct_trials = trials.filter({
+                    correct: true
+                });
+                var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+                var rt = Math.round(correct_trials.select('rt').mean());
+
+                // save to qualtrics embedded data
+                Qualtrics.SurveyEngine.setEmbeddedData("accuracy", accuracy);
+                Qualtrics.SurveyEngine.setEmbeddedData("rt", rt);
+
+                // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
+                qthis.clickNextButton();
+    }
         });
     
     </script>
