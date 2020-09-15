@@ -474,16 +474,9 @@
 
         timeline.push(conclusion)
 
-        var images = ['img/1DE1.jpg','img/1DE2.jpg','img/1LE1.jpg','img/1LE2.jpg',
-                     'img/2DE1.jpg','img/2DE2.jpg','img/2LE1.jpg','img/2LE2.jpg',
-                     'img/3DE1.jpg','img/3DE2.jpg','img/3LE1.jpg','img/3LE2.jpg',
-                     'img/4DE1.jpg','img/4DE2.jpg','img/4LE1.jpg','img/4LE2.jpg',
-                     'img/5DE1.jpg','img/5DE2.jpg','img/5LE1.jpg','img/5LE2.jpg'];
-
     /* start the experiment */
         jsPsych.init({
           timeline: timeline,
-          preload_images: images,
           on_finish: function() {
             jsPsych.data.displayData();
           }
