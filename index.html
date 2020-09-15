@@ -23,13 +23,14 @@
 <body>
     
     <script type="text/javascript">
-    
+            
     var repo_site = "https://jwylie21.github.io/disguststudy-replication/";
        
     /* create timeline */
     var timeline = [];
         
-
+    // generate a random subject ID with 15 characters
+    var subject_id = jsPsych.randomization.randomID(8);
 
     function set_html_style_1() {
         document.body.style.backgroundColor = 'white' // background color
@@ -478,24 +479,9 @@
     /* start the experiment */
         jsPsych.init({
           timeline: timeline,
-          on_finish: function (data) {
-                /* Change 5: Summarizing and save the results to Qualtrics */
-                // summarize the results
-                var trials = jsPsych.data.get().filter({
-                    test_part: 'test'
-                });
-                var correct_trials = trials.filter({
-                    correct: true
-                });
-                var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
-                var rt = Math.round(correct_trials.select('rt').mean());
-
-                // save to qualtrics embedded data
-                Qualtrics.SurveyEngine.setEmbeddedData("accuracy", accuracy);
-                Qualtrics.SurveyEngine.setEmbeddedData("rt", rt);
-
-                // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
-                qthis.clickNextButton();
+          subject: subject_id,
+          on_finish: function() {
+        jsPsych.data.displayData();
     }
         });
     
