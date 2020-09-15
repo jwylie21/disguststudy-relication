@@ -74,7 +74,7 @@
               '<div style="color:black;font-size:30px;line-height:1.5"> For the main task, you will first see a <b>+</b> in the middle of a blank screen. This is to let you know that main task is about to pop up. This will only be there for a short amount of time.'+
               " After the <b>+</b>, you will see a screen that is either black or white with a number 1-5 listed on the screen. This number will be <strong>VERY</strong> hard to see." + 
               " </p> Your task is to choose the correct number that is presented on the screen using the numbers on your computer that correspond. If you cannot see the number, try your best to guess what it might be. The trial will not move forward until you make a response. " + 
-              ' <p> Here is an example of what you will see:</p> <p><img src="https://jwylie21.github.io/disguststudy-replication/img/Example1_DR.png"></img></p>' + 
+              ' <p> Here is an example of what you will see:</p> <p><img src="../img/Example1_DR.png"></img></p>' + 
               ' <p><b>Press the right arrow key to continue.</b></p></div>', 
               ' <div style="color:black;font-size:30px;line-height:1.5"><p>There are a total of 4 blocks. Some trials will be light gray on a white background and some will be dark gray on a black background. </p>' +
               '<p><b>Press the right arrow key to continue.</b></p></div>'],
@@ -146,39 +146,39 @@
 
         /* Pracitce Trials - stim */
       var pracStim = [
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/2TrialD.bmp", data: { test_part: 'practice', correct_response: '2' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/3TrailL.bmp", data: { test_part: 'practice', correct_response: '3' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/1TrialD.bmp", data: { test_part: 'practice', correct_response: '1' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/5TrialL.bmp", data: { test_part: 'practice', correct_response: '5' } }
+          { stimulus: "../img/2TrialD.bmp", data: { test_part: 'practice', correct_response: '2' } },
+          { stimulus: "../img/3TrailL.bmp", data: { test_part: 'practice', correct_response: '3' } },
+          { stimulus: "../img/1TrialD.bmp", data: { test_part: 'practice', correct_response: '1' } },
+          { stimulus: "../img/5TrialL.bmp", data: { test_part: 'practice', correct_response: '5' } }
         ]
         /* dark trials - first one is hard and second one is easy */
 
         var stimuli1 = [
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/1DE1.bmp", data: { test_part: 'test', correct_response: '1' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/1DE2.bmp", data: { test_part: 'test', correct_response: '1' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/2DE1.bmp", data: { test_part: 'test', correct_response: '2' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/2DE2.bmp", data: { test_part: 'test', correct_response: '2' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/3DE1.bmp", data: { test_part: 'test', correct_response: '3' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/3DE2.bmp", data: { test_part: 'test', correct_response: '3' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/4DE1.bmp", data: { test_part: 'test', correct_response: '4' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/4DE2.bmp", data: { test_part: 'test', correct_response: '4' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/5DE1.bmp", data: { test_part: 'test', correct_response: '5' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/5DE2.bmp", data: { test_part: 'test', correct_response: '5' } }
+          { stimulus: "../img/1DE1.bmp", data: { test_part: 'test', correct_response: '1' } },
+          { stimulus: "../img/1DE2.bmp", data: { test_part: 'test', correct_response: '1' } },
+          { stimulus: "../img/2DE1.bmp", data: { test_part: 'test', correct_response: '2' } },
+          { stimulus: "../img/2DE2.bmp", data: { test_part: 'test', correct_response: '2' } },
+          { stimulus: "../img/3DE1.bmp", data: { test_part: 'test', correct_response: '3' } },
+          { stimulus: "../img/3DE2.bmp", data: { test_part: 'test', correct_response: '3' } },
+          { stimulus: "../img/4DE1.bmp", data: { test_part: 'test', correct_response: '4' } },
+          { stimulus: "../img/4DE2.bmp", data: { test_part: 'test', correct_response: '4' } },
+          { stimulus: "../img/5DE1.bmp", data: { test_part: 'test', correct_response: '5' } },
+          { stimulus: "../img/5DE2.bmp", data: { test_part: 'test', correct_response: '5' } }
         ]
 
         /* light trials - first one is hard and second one is easy */
 
         var stimuli2 = [
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/1LE1.bmp", data: { test_part: 'test', correct_response: '1' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/1LE2.bmp", data: { test_part: 'test', correct_response: '1' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/2LE1.bmp", data: { test_part: 'test', correct_response: '2' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/2LE2.bmp", data: { test_part: 'test', correct_response: '2' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/3LE1.bmp", data: { test_part: 'test', correct_response: '3' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/3LE2.bmp", data: { test_part: 'test', correct_response: '3' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/4LE1.bmp", data: { test_part: 'test', correct_response: '4' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/4LE2.bmp", data: { test_part: 'test', correct_response: '4' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/5LE1.bmp", data: { test_part: 'test', correct_response: '5' } },
-          { stimulus: "https://jwylie21.github.io/disguststudy-replication/img/5LE2.bmp", data: { test_part: 'test', correct_response: '5' } }
+          { stimulus: "../img/1LE1.bmp", data: { test_part: 'test', correct_response: '1' } },
+          { stimulus: "../img/1LE2.bmp", data: { test_part: 'test', correct_response: '1' } },
+          { stimulus: "../img/2LE1.bmp", data: { test_part: 'test', correct_response: '2' } },
+          { stimulus: "../img/2LE2.bmp", data: { test_part: 'test', correct_response: '2' } },
+          { stimulus: "../img/3LE1.bmp", data: { test_part: 'test', correct_response: '3' } },
+          { stimulus: "../img/3LE2.bmp", data: { test_part: 'test', correct_response: '3' } },
+          { stimulus: "../img/4LE1.bmp", data: { test_part: 'test', correct_response: '4' } },
+          { stimulus: "../img/4LE2.bmp", data: { test_part: 'test', correct_response: '4' } },
+          { stimulus: "../img/5LE1.bmp", data: { test_part: 'test', correct_response: '5' } },
+          { stimulus: "../img/5LE2.bmp", data: { test_part: 'test', correct_response: '5' } }
         ]
 
         test_stimuli1 = jsPsych.randomization.sampleWithReplacement(stimuli1, 10)
