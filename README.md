@@ -1,2 +1,2 @@
 # Disgust Study Replication Pilot
-This is the GitHub version attempt to run the disgust study replication pilot
+This is the GitHub version attempt to run a behavioral study replication pilot
